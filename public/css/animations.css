@@ -1,0 +1,102 @@
+/* ==========================================================================
+   animations.css — Reveal & motion primitives
+   ========================================================================== */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes maskReveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes subtleScale {
+  from { transform: scale(1.06); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Reveal-on-scroll (activated by js/reveal.js) */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--dur-slow) var(--ease-out),
+              transform var(--dur-slow) var(--ease-out);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal--fade { transform: none; }
+.reveal--delay-1 { transition-delay: 100ms; }
+.reveal--delay-2 { transition-delay: 200ms; }
+.reveal--delay-3 { transition-delay: 300ms; }
+.reveal--delay-4 { transition-delay: 400ms; }
+
+.reveal--mask {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 900ms var(--ease-in-out);
+}
+
+.reveal--mask.is-visible {
+  clip-path: inset(0 0 0 0);
+}
+
+/* Ambient scroll indicator */
+@keyframes scrollHint {
+  0% { transform: translateY(0); opacity: 0.4; }
+  50% { transform: translateY(10px); opacity: 1; }
+  100% { transform: translateY(0); opacity: 0.4; }
+}
+
+/* Ken Burns — slow, imperceptible drift for hero media */
+@keyframes kenBurns {
+  0%   { transform: scale(1.08) translate3d(0, 0, 0); }
+  100% { transform: scale(1.18) translate3d(-2%, -1.5%, 0); }
+}
+
+.ken-burns {
+  animation: kenBurns 28s var(--ease-in-out) both;
+  will-change: transform;
+}
+
+/* Character/line reveal — for editorial display text */
+.reveal--lines > * {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 900ms var(--ease-out), transform 900ms var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 90ms);
+}
+.reveal--lines.is-visible > * { opacity: 1; transform: translateY(0); }
+
+/* Parallax layer — driven by --py from JS */
+.parallax {
+  will-change: transform;
+  transform: translate3d(0, var(--py, 0px), 0);
+  transition: transform 100ms linear;
+}
+
+/* Prefers reduced motion — quiet everything */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .ken-burns,
+  .parallax { transform: none !important; }
+}

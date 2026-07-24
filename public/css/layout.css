@@ -1,0 +1,128 @@
+/* ==========================================================================
+   layout.css — Structural layout primitives
+   ========================================================================== */
+
+.main--offset {
+  padding-top: 0;
+}
+
+.main--offset .page-hero {
+  padding-top: clamp(120px, 15vh, 140px);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.container--content {
+  max-width: var(--container-content);
+}
+
+.container--narrow {
+  max-width: 880px;
+}
+
+.container--text {
+  max-width: var(--container-text);
+}
+
+/* Section rhythm */
+.section {
+  padding-block: clamp(var(--space-6), 10vw, var(--space-9));
+}
+
+.section--sm {
+  padding-block: clamp(var(--space-5), 7vw, var(--space-7));
+}
+
+.section--lg {
+  padding-block: clamp(var(--space-7), 14vw, calc(var(--space-9) + var(--space-5)));
+}
+
+.section--flush {
+  padding-block: 0;
+}
+
+/* Backgrounds */
+.bg-cream { background: var(--color-cream); }
+.bg-white { background: var(--color-white); }
+.bg-forest { background: var(--color-forest); color: var(--color-cream); }
+.bg-charcoal { background: var(--color-charcoal); color: var(--color-cream); }
+
+.bg-forest h1,
+.bg-forest h2,
+.bg-forest h3,
+.bg-charcoal h1,
+.bg-charcoal h2,
+.bg-charcoal h3 {
+  color: var(--color-cream);
+}
+
+/* Grid primitives */
+.grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.stack--lg { gap: var(--space-5); }
+.stack--xl { gap: var(--space-6); }
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+/* Visual dividers */
+.rule {
+  height: 1px;
+  background: var(--color-border);
+  border: 0;
+  width: 100%;
+}
+
+.rule--dark { background: var(--color-border-dark); }
+.rule--short { max-width: 64px; }
+
+/* Utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: var(--space-2);
+  background: var(--color-forest);
+  color: var(--color-cream);
+  padding: var(--space-2) var(--space-3);
+  z-index: var(--z-modal);
+  border-radius: var(--radius-sm);
+  transition: top var(--dur-fast) var(--ease-out);
+}
+
+.skip-link:focus {
+  top: var(--space-2);
+}

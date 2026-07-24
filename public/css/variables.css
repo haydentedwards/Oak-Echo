@@ -1,0 +1,123 @@
+/* ==========================================================================
+   variables.css — Oak & Echo Design Tokens
+   Single source of truth. Do not hard-code values elsewhere.
+   ========================================================================== */
+
+:root {
+  /* ---------- Color ---------- */
+  --color-forest: #23352b;
+  --color-forest-deep: #1a2820;
+  --color-cream: #f5f1ea;
+  --color-cream-warm: #ede8de;
+  --color-gold: #c7a56b;
+  --color-gold-soft: #d9be92;
+  --color-charcoal: #2d2d2d;
+  --color-white: #ffffff;
+
+  --color-gray-50: #fafaf8;
+  --color-gray-100: #f2f1ed;
+  --color-gray-200: #e6e4dd;
+  --color-gray-300: #cfccc2;
+  --color-gray-400: #9a978d;
+  --color-gray-500: #6b6963;
+  --color-gray-600: #4a4844;
+
+  /* Muted, on-brand validation color — no bright/alarming red, stays
+     within the earthy palette so error states don't clash with the
+     rest of the site. */
+  --color-error: #9c4f3f;
+
+  /* Semantic aliases */
+  --color-bg: var(--color-white);
+  --color-bg-alt: var(--color-cream);
+  --color-bg-dark: var(--color-forest);
+  --color-text: var(--color-charcoal);
+  --color-text-muted: var(--color-gray-500);
+  --color-text-inverse: var(--color-cream);
+  --color-accent: var(--color-gold);
+  --color-border: var(--color-gray-200);
+  --color-border-dark: rgba(245, 241, 234, 0.14);
+
+  /* ---------- Spacing (8pt scale) ---------- */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 48px;
+  --space-6: 64px;
+  --space-7: 112px;
+  --space-8: 160px;
+  --space-9: 208px;
+
+  /* ---------- Typography ---------- */
+  --font-display: "Cormorant Garamond", "Cormorant", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  /* Fluid type scale (clamp: min, preferred, max) */
+  --text-xs: 0.75rem;      /* 12 */
+  --text-sm: 0.875rem;     /* 14 */
+  --text-base: 1rem;       /* 16 */
+  --text-md: 1.125rem;     /* 18 */
+  --text-lg: 1.3125rem;    /* 21 */
+  --text-xl: clamp(1.625rem, 1.2rem + 1.3vw, 2.125rem);
+  --text-2xl: clamp(2.125rem, 1.4rem + 2vw, 3rem);
+  --text-3xl: clamp(2.5rem, 1.6rem + 3vw, 4.25rem);
+  --text-4xl: clamp(3rem, 1.8rem + 4.5vw, 6rem);
+  --text-5xl: clamp(3.75rem, 2rem + 6vw, 8rem);
+  --text-hero: clamp(4.5rem, 2.4rem + 10vw, 13rem);
+  --text-monument: clamp(3.5rem, 2rem + 5vw, 8rem);
+
+  --leading-tight: 1.02;
+  --leading-snug: 1.15;
+  --leading-normal: 1.75;
+  --leading-relaxed: 1.85;
+  --leading-loose: 1.95;
+
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.08em;
+  --tracking-wider: 0.18em;
+
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+
+  /* ---------- Layout ---------- */
+  --container-max: 1440px;
+  --container-content: 1200px;
+  --container-text: 62ch;
+  --container-narrow: 48ch;
+  --container-reading: 38rem;
+  --gutter: clamp(24px, 5vw, 64px);
+
+  /* Paper texture — subtle luxury-stationery grain */
+  --paper-noise: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0.14 0 0 0 0 0.21 0 0 0 0 0.17 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  /* ---------- Radius ---------- */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  /* ---------- Shadow (two only) ---------- */
+  --shadow-soft: 0 4px 24px -8px rgba(35, 53, 43, 0.08);
+  --shadow-medium: 0 20px 60px -20px rgba(35, 53, 43, 0.18);
+
+  /* ---------- Motion ---------- */
+  --dur-fast: 200ms;
+  --dur-base: 400ms;
+  --dur-slow: 600ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* ---------- Layers ---------- */
+  --z-base: 1;
+  --z-raised: 10;
+  --z-nav: 100;
+  --z-overlay: 500;
+  --z-modal: 1000;
+
+  /* ---------- Nav ---------- */
+  --nav-height: 96px;
+  --nav-height-scrolled: 72px;
+}
