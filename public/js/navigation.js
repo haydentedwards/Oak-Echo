@@ -12,7 +12,16 @@ export function initNavigation() {
       nav.classList.toggle("is-scrolled", window.scrollY > 24);
     };
     onScroll();
+    // initNavigation() now runs once per page view (including client-side
+    // route changes), and `nav` is a fresh DOM node each time — so the old
+    // listener (bound to the previous page's now-detached nav node) must
+    // be removed before binding the new one, or the navbar would stop
+    // updating after the first client-side navigation.
+    if (window.__oakEchoScrollHandler) {
+      window.removeEventListener("scroll", window.__oakEchoScrollHandler);
+    }
     window.addEventListener("scroll", onScroll, { passive: true });
+    window.__oakEchoScrollHandler = onScroll;
   }
 
   // Active nav indicator based on pathname
@@ -83,8 +92,16 @@ export function initNavigation() {
       }
     };
     update();
+    // Same rebind concern as the navbar scroll listener above: the
+    // previous page's parallax elements are gone, so drop the old
+    // listener before attaching one bound to the current page's elements.
+    if (window.__oakEchoParallaxScroll) {
+      window.removeEventListener("scroll", window.__oakEchoParallaxScroll);
+      window.removeEventListener("resize", window.__oakEchoParallaxScroll);
+    }
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll, { passive: true });
+    window.__oakEchoParallaxScroll = onScroll;
   }
 
   // Stagger index on reveal--lines children

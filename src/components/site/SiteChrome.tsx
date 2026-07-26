@@ -1,5 +1,13 @@
 import type { ReactNode } from "react";
+import { useEffect } from "react";
 import { useLocation } from "@tanstack/react-router";
+
+// Module-scoped (not component state) so it survives across every
+// client-side route change for the lifetime of the page, and only resets
+// on a genuine full reload — used to skip the redundant re-init below on
+// the very first page mount, since app.js's own DOMContentLoaded listener
+// already handles that one.
+let hasInitializedOnce = false;
 
 const NAV_LEFT = [
   { href: "/about", label: "About" },
@@ -107,7 +115,23 @@ export function SiteFooter() {
 export function SiteChrome({ children }: { children: ReactNode }) {
   const location = useLocation();
   const isHome = location.pathname === "/";
-  
+
+  useEffect(() => {
+    // On the very first page mount, app.js's own DOMContentLoaded listener
+    // already runs init() — running it again here would double-attach
+    // click listeners (nav toggle, accordion, etc.), causing them to
+    // cancel each other out. Only re-run on subsequent client-side
+    // route changes, which never fire a fresh DOMContentLoaded.
+    if (!hasInitializedOnce) {
+      hasInitializedOnce = true;
+      return;
+    }
+    const raf = requestAnimationFrame(() => {
+      (window as unknown as { __oakEchoInit?: () => void }).__oakEchoInit?.();
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [location.pathname]);
+
   return (
     <>
       <a href="#main" className="skip-link">Skip to content</a>
@@ -123,15 +147,22 @@ export function PageHero({
   title,
   italic,
   lede,
+  notice,
 }: {
   eyebrow: string;
   title: string;
   italic?: string;
   lede?: string;
+  notice?: string;
 }) {
   return (
     <section className="page-hero" aria-label={eyebrow}>
       <div className="container container--content page-hero__inner">
+        {notice ? (
+          <p className="notice-bar reveal" role="status">
+            {notice}
+          </p>
+        ) : null}
         <p className="eyebrow reveal">{eyebrow}</p>
         <h1 className="page-hero__title display--xl reveal reveal--delay-1 text-balance">
           {title}
