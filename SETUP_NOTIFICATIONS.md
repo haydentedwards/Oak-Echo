@@ -16,7 +16,7 @@ npm install -g supabase
 
 ```bash
 supabase login
-supabase link --project-ref oovysgctlzwmvkwfdqsd
+supabase link --project-ref gxotcehtffshkuqwknts
 ```
 
 (That project ref is already in `supabase/config.toml`.)
