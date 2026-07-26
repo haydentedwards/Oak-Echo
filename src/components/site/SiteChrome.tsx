@@ -123,15 +123,22 @@ export function PageHero({
   title,
   italic,
   lede,
+  notice,
 }: {
   eyebrow: string;
   title: string;
   italic?: string;
   lede?: string;
+  notice?: string;
 }) {
   return (
     <section className="page-hero" aria-label={eyebrow}>
       <div className="container container--content page-hero__inner">
+        {notice ? (
+          <p className="notice-bar reveal" role="status">
+            {notice}
+          </p>
+        ) : null}
         <p className="eyebrow reveal">{eyebrow}</p>
         <h1 className="page-hero__title display--xl reveal reveal--delay-1 text-balance">
           {title}

@@ -101,15 +101,21 @@ function ContactPage() {
       message: String(fd.get("message") ?? "").trim() || null,
     };
 
-    const { error } = await supabase.from("inquiries").insert(payload);
-    if (error) {
+    try {
+      const { error } = await supabase.from("inquiries").insert(payload);
+      if (error) {
+        setStatus("error");
+        setErrorMsg("Something went wrong. Please email hello@oakandechoaudio.com directly.");
+        return;
+      }
+      setStatus("success");
+      form.reset();
+      navigate({ to: "/thank-you" });
+    } catch (err) {
+      console.error(err);
       setStatus("error");
       setErrorMsg("Something went wrong. Please email hello@oakandechoaudio.com directly.");
-      return;
     }
-    setStatus("success");
-    form.reset();
-    navigate({ to: "/thank-you" });
   }
 
   return (
@@ -119,6 +125,7 @@ function ContactPage() {
         title="Tell us about"
         italic="your day."
         lede="A few details are all we need to begin. We reply personally, within one business day."
+        notice="Currently accepting bookings for 2027"
       />
 
       <section className="section section--lg bg-white">
