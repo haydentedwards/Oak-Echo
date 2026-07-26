@@ -1687,3 +1687,21 @@
 .prose, .lede, .split__prose, .protect-card__text, .planners__item p, .thanks__lede {
   hanging-punctuation: first;
 }
+
+/* ---------- Notice bar (e.g. availability disclaimers) ---------- */
+.notice-bar {
+  display: inline-block;
+  background: var(--color-forest);
+  color: var(--color-cream);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-lg);
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-3);
+}
+
+.notice-bar strong {
+  color: var(--color-gold-soft);
+  font-weight: 500;
+}
